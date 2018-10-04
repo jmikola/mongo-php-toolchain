@@ -6,22 +6,22 @@ functions:
     - command: git.get_project
       params:
         directory: "src"
-  "setupMultiArch":
+  "debianSetup":
     command: shell.exec
     params:
       working_dir: "src"
       script: |
         set -o errexit
         set -o xtrace
-        ./setup.sh
-  "buildLinuxToolchain":
+        ./debian-setup.sh ${arch}
+  "buildDebianLinuxToolchain":
     command: shell.exec
     params:
       working_dir: "src"
       script: |
         set -o errexit
         set -o xtrace
-        ./build-linux-toolchain.sh
+        ./build-debian-linux-toolchain.sh ${arch}
   "uploadToolchain":
     command: s3.put
     params:
@@ -48,9 +48,9 @@ pre:
 
 # TASK DEFINITIONS
 tasks:
-  - name: setup-multiarch
+  - name: debian-setup
     commands:
-      - func: setupMultiArch
+      - func: debianSetup
 
   - name: build-linux-toolchain
     depends_on:
@@ -70,13 +70,25 @@ tasks:
 
 buildvariants:
 
-# OpenSSL 1.1.0
-- name: debian92
-  display_name: Debian 9.2 i386,x86_64
+- name: debian92-64bit
+  display_name: Debian 9.2 64-bit
   run_on:
     - debian92-build
+  expansions:
+    arch: 64bit
   tasks:
-     - name: setup-multiarch
+     - name: debian-setup
+     - name: build-linux-toolchain
+     - name: push-linux-binaries
+
+- name: debian92-32bit
+  display_name: Debian 9.2 32-bit
+  run_on:
+    - debian92-build
+  expansions:
+    arch: 32bit
+  tasks:
+     - name: debian-setup
      - name: build-linux-toolchain
      - name: push-linux-binaries
 

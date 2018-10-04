@@ -11,8 +11,6 @@ if (test "${PREFIX}" = ""); then
 	PREFIX="/opt";
 fi
 
-sudo apt-get install -y make autoconf gcc bison locate pkg-config
-
 NUMBERS=`echo $VERSION | sed -r 's/[^0-9.]+//'`
 MINI_VERSION=`echo $VERSION | sed 's/^\([0-9]\.[0-9]\).*/\1/'`
 echo $NUMBERS
@@ -29,7 +27,6 @@ else
 	ARCH=""
 fi
 	
-sudo apt-get install -y libxml2-dev${ARCH} libicu-dev${ARCH} libz-dev${ARCH} libssl1.1${ARCH} libssl1.0.2${ARCH} libxslt1-dev${ARCH} libsasl2-dev${ARCH}
 if (test  "${MINI_VERSION}" = "5.5"); then
 	sudo apt-get install -y libssl1.0-dev${ARCH}
 elif (test  "${MINI_VERSION}" = "5.6"); then

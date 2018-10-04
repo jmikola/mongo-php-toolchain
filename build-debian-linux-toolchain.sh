@@ -5,6 +5,9 @@ set -o pipefail
 set -o xtrace
 set -o nounset
 
+# First argument is the architecture (32bit, when empty: x86_64)
+ARCH=$1
+
 # Where we're installing everything.
 INSTALL_DIR=$(pwd)/php
 
@@ -31,12 +34,16 @@ elif [[ $OPENSSL_MINOR_VERSION = "0" && $OPENSSL_PATCH_VERSION = "2" ]]; then
     PHP_RELEASES=$PHP_RELEASES_FOR_STABLE_OPENSSL
 fi
 
+if (test "{$ARCH}" = "32bit"); then
+    BITNESS=32bit
+else
+    BITNESS=64bit
+fi
+
 for phprel in $PHP_RELEASES
 do
-    PREFIX="$INSTALL_DIR" ./build-single.sh "$phprel" debug nts 32bit
-    PREFIX="$INSTALL_DIR" ./build-single.sh "$phprel" debug zts 32bit
-    PREFIX="$INSTALL_DIR" ./build-single.sh "$phprel" debug nts 64bit
-    PREFIX="$INSTALL_DIR" ./build-single.sh "$phprel" debug zts 64bit
+    PREFIX="$INSTALL_DIR" ./build-debian-single.sh "$phprel" debug nts ${BITNESS}
+    PREFIX="$INSTALL_DIR" ./build-debian-single.sh "$phprel" debug zts ${BITNESS}
 done
 
 tar -czf php.tar.gz php
