@@ -28,7 +28,7 @@ if (test "${VARIANT}" = "ubuntu"); then
 else
 	sudo apt-get install -y libssl1.1${PKG_ARCH}
 fi
-sudo apt-get install -y libssl-dev${ARCH}
+sudo apt-get install -y libssl-dev${PKG_ARCH}
 
 
 # Where we're installing everything.
