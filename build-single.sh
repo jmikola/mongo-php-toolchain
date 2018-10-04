@@ -8,7 +8,7 @@ POSTFIX=
 EXTRA_FLAGS=
 
 if (test "${PREFIX}" = ""); then
-	PREFIX="/usr/local/php";
+	PREFIX="/opt";
 fi
 
 #sudo apt install -y make autoconf gcc bison locate pkg-config
