@@ -29,7 +29,7 @@ else
 	ARCH=""
 fi
 	
-#sudo apt install -y libxml2-dev${ARCH} libicu-dev${ARCH} libz-dev${ARCH} libssl1.1${ARCH} libssl1.0.2${ARCH} libxslt1-dev${ARCH} libsasl2-dev${ARCH}
+sudo apt install -y libxml2-dev${ARCH} libicu-dev${ARCH} libz-dev${ARCH} libssl1.1${ARCH} libssl1.0.2${ARCH} libxslt1-dev${ARCH} libsasl2-dev${ARCH}
 #if (test  "${MINI_VERSION}" = "5.5"); then
 #	sudo apt install -y libssl1.0-dev${ARCH}
 #elif (test  "${MINI_VERSION}" = "5.6"); then
@@ -50,7 +50,7 @@ else
 fi
 
 if [ ! -f php-${VERSION}.tar.bz2 ]; then
-	wget http://uk1.php.net/distributions/php-${VERSION}.tar.bz2 -O php-${VERSION}.tar.bz2
+	wget http://us1.php.net/distributions/php-${VERSION}.tar.bz2 -O php-${VERSION}.tar.bz2
 fi
 
 rm -rf php-${VERSION}
