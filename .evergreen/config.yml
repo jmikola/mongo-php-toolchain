@@ -8,10 +8,11 @@ functions:
         directory: "src"
   "setupMultiArch":
     command: shell.exec
-    script: |
-      set -o errexit
-      set -o xtrace
-      ./setup.sh
+    params:
+      script: |
+        set -o errexit
+        set -o xtrace
+        ./setup.sh
   "buildLinuxToolchain":
     command: shell.exec
     params:
