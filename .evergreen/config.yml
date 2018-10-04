@@ -70,10 +70,11 @@ buildvariants:
 
 # OpenSSL 1.1.0
 - name: debian92
-  display_name: Debian 9.2 x86_64
+  display_name: Debian 9.2 i386,x86_64
   run_on:
     - debian92-build
   tasks:
+     - name: setup-multiarch
      - name: build-linux-toolchain
      - name: push-linux-binaries
 
