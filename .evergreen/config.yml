@@ -6,14 +6,6 @@ functions:
     - command: git.get_project
       params:
         directory: "src"
-  "debianSetup":
-    command: shell.exec
-    params:
-      working_dir: "src"
-      script: |
-        set -o errexit
-        set -o xtrace
-        ./debian-setup.sh ${arch}
   "buildDebianLinuxToolchain":
     command: shell.exec
     params:
@@ -48,13 +40,7 @@ pre:
 
 # TASK DEFINITIONS
 tasks:
-  - name: debian-setup
-    commands:
-      - func: debianSetup
-
   - name: build-debian-linux-toolchain
-    depends_on:
-    - name: debian-setup
     commands:
       - func: buildDebianLinuxToolchain
       - func: uploadToolchain
@@ -77,7 +63,6 @@ buildvariants:
   expansions:
     arch: 64bit
   tasks:
-     - name: debian-setup
      - name: build-debian-linux-toolchain
      - name: push-linux-binaries
 
@@ -88,7 +73,6 @@ buildvariants:
   expansions:
     arch: 32bit
   tasks:
-     - name: debian-setup
      - name: build-debian-linux-toolchain
      - name: push-linux-binaries
 
