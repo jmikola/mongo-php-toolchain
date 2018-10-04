@@ -52,16 +52,16 @@ tasks:
     commands:
       - func: debianSetup
 
-  - name: build-linux-toolchain
+  - name: build-debian-linux-toolchain
     depends_on:
-    - name: setup-multiarch
+    - name: debian-setup
     commands:
-      - func: buildLinuxToolchain
+      - func: buildDebianLinuxToolchain
       - func: uploadToolchain
 
   - name: push-linux-binaries
     depends_on:
-    - name: build-linux-toolchain
+    - name: build-debian-linux-toolchain
     stepback: false
     commands:
       - func: pushToolchainRelease
@@ -81,16 +81,16 @@ buildvariants:
      - name: build-linux-toolchain
      - name: push-linux-binaries
 
-#- name: debian92-32bit
-#  display_name: Debian 9.2 32-bit
-#  run_on:
-#    - debian92-build
-#  expansions:
-#    arch: 32bit
-#  tasks:
-#     - name: debian-setup
-#     - name: build-linux-toolchain
-#     - name: push-linux-binaries
+- name: debian92-32bit
+  display_name: Debian 9.2 32-bit
+  run_on:
+    - debian92-build
+  expansions:
+    arch: 32bit
+  tasks:
+     - name: debian-setup
+     - name: build-linux-toolchain
+     - name: push-linux-binaries
 
 ## OpenSSL 1.0.2
 #- name: ubuntu1604
