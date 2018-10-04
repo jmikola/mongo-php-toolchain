@@ -26,14 +26,6 @@ else
 	POSTFIX="$POSTFIX-64bit"
 	ARCH=""
 fi
-	
-if (test  "${MINI_VERSION}" = "5.5"); then
-	sudo apt-get install -y libssl1.0-dev${ARCH}
-elif (test  "${MINI_VERSION}" = "5.6"); then
-	sudo apt-get install -y libssl1.0-dev${ARCH}
-else
-	sudo apt-get install -y libssl-dev${ARCH}
-fi
 
 if (test "${ZTS}" = "zts"); then
 	EXTRA_FLAGS="$EXTRA_FLAGS --enable-maintainer-zts"
