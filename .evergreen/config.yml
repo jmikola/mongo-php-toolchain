@@ -6,6 +6,12 @@ functions:
     - command: git.get_project
       params:
         directory: "src"
+  "setupMultiArch":
+    command: shell.exec
+    script: |
+      set -o errexit
+      set -o xtrace
+      ./setup.sh
   "buildLinuxToolchain":
     command: shell.exec
     params:
@@ -40,8 +46,13 @@ pre:
 
 # TASK DEFINITIONS
 tasks:
+  - name: setup-multiarch
+    commands:
+      - func: setupMultiArch
 
   - name: build-linux-toolchain
+    depends_on:
+    - name: setup-multiarch
     commands:
       - func: buildLinuxToolchain
       - func: uploadToolchain
