@@ -78,7 +78,7 @@ buildvariants:
     arch: 64bit
   tasks:
      - name: debian-setup
-     - name: build-linux-toolchain
+     - name: build-debian-linux-toolchain
      - name: push-linux-binaries
 
 - name: debian92-32bit
@@ -89,7 +89,7 @@ buildvariants:
     arch: 32bit
   tasks:
      - name: debian-setup
-     - name: build-linux-toolchain
+     - name: build-debian-linux-toolchain
      - name: push-linux-binaries
 
 ## OpenSSL 1.0.2
