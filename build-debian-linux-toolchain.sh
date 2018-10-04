@@ -47,7 +47,7 @@ elif [[ $OPENSSL_MINOR_VERSION = "0" && $OPENSSL_PATCH_VERSION = "2" ]]; then
     PHP_RELEASES=$PHP_RELEASES_FOR_STABLE_OPENSSL
 fi
 
-if (test "{$ARCH}" = "32bit"); then
+if (test "${ARCH}" = "32bit"); then
     BITNESS=32bit
 else
     BITNESS=64bit
