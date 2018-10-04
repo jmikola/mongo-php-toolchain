@@ -1,0 +1,94 @@
+stepback: false
+
+# FUNCTIONS
+functions:
+  "fetchSource" :
+    - command: git.get_project
+      params:
+        directory: "src"
+  "buildLinuxToolchain":
+    command: shell.exec
+    params:
+      working_dir: "src"
+      script: |
+        set -o errexit
+        set -o xtrace
+        ./build-linux-toolchain.sh
+  "uploadToolchain":
+    command: s3.put
+    params:
+      aws_key: ${aws_key}
+      aws_secret: ${aws_secret}
+      local_file: src/php.tar.gz
+      remote_file: ${aws_prefix}/${build_variant}/${revision}/${build_id}.tar.gz
+      bucket: mciuploads
+      permissions: public-read
+      content_type: ${content_type|application/x-gzip}
+  "pushToolchainRelease":
+    command: s3Copy.copy
+    params:
+      aws_key: ${aws_key}
+      aws_secret: ${aws_secret}
+      s3_copy_files:
+        - { 'source': { 'path': '${aws_prefix}/${build_variant}/${revision}/${build_id}.tar.gz', 'bucket': 'mciuploads' },
+            'destination': { 'path': 'build/toolchain-drivers/mongo-php-driver/php-toolchain-${build_variant}-${revision}.tar.gz', 'bucket': 'boxes.10gen.com' }
+          }
+
+# PRE/POST TASKS
+pre:
+  - func: fetchSource
+
+# TASK DEFINITIONS
+tasks:
+
+  - name: build-linux-toolchain
+    commands:
+      - func: buildLinuxToolchain
+      - func: uploadToolchain
+
+  - name: push-linux-binaries
+    depends_on:
+    - name: build-linux-toolchain
+    stepback: false
+    commands:
+      - func: pushToolchainRelease
+
+# BUILD VARIANTS
+
+buildvariants:
+
+# OpenSSL 1.1.0
+- name: debian92
+  display_name: Debian 9.2 x86_64
+  run_on:
+    - debian92-build
+  tasks:
+     - name: build-linux-toolchain
+     - name: push-linux-binaries
+
+## OpenSSL 1.0.2
+#- name: ubuntu1604
+#  display_name: Ubuntu 16.04 x86_64
+#  run_on:
+#    - ubuntu1604-build
+#  tasks:
+#     - name: build-linux-toolchain
+#     - name: push-linux-binaries
+#
+## OpenSSL 1.0.1
+#- name: rhel62
+#  display_name: RHEL 6.2 x86_64
+#  run_on:
+#    - rhel62-build
+#  tasks:
+#     - name: build-linux-toolchain
+#     - name: push-linux-binaries
+#
+## PyMongo v2.9 distro
+#- name: ubuntu1204
+#  display_name: Ubuntu 12.04 x86_64
+#  run_on:
+#    - ubuntu1204-build
+#  tasks:
+#     - name: build-linux-toolchain
+#     - name: push-linux-binaries
