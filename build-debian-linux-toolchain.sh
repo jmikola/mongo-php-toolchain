@@ -22,7 +22,7 @@ sudo apt-get install -y g++-multilib make autoconf gcc bison locate pkg-config
 # Install architecture dependent packages, but Ubuntu has different libssl versions
 sudo apt-get install -y libxml2-dev${PKG_ARCH} libicu-dev${PKG_ARCH} libz-dev${PKG_ARCH} libxslt1-dev${PKG_ARCH} libsasl2-dev${PKG_ARCH}
 
-VARIANT=`cat /etc/*-release | grep ID= | sed 's/ID=//'`
+VARIANT=`cat /etc/*-release | grep ^ID= | sed 's/ID=//'`
 if (test "${VARIANT}" = "ubuntu"); then
 	sudo apt-get install -y libssl1.0.0${PKG_ARCH}
 else
