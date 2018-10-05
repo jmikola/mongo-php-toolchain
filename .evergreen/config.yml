@@ -128,6 +128,16 @@ buildvariants:
      - name: build-rhel-linux-toolchain
      - name: push-rhel-linux-binaries
 
+- name: rhel71-power8
+  display_name: RHEL 7.0 Power 8
+  run_on:
+    - rhel71-power8-build
+  expansions:
+    arch: 64bit
+  tasks:
+     - name: build-rhel-linux-toolchain
+     - name: push-rhel-linux-binaries
+
 ## OpenSSL 1.0.1
 #- name: rhel62
 #  display_name: RHEL 6.2 x86_64
