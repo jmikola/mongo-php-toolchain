@@ -14,6 +14,14 @@ functions:
         set -o errexit
         set -o xtrace
         ./build-debian-linux-toolchain.sh ${arch}
+  "buildRHELLinuxToolchain":
+    command: shell.exec
+    params:
+      working_dir: "src"
+      script: |
+        set -o errexit
+        set -o xtrace
+        ./build-rhel-linux-toolchain.sh ${arch}
   "uploadToolchain":
     command: s3.put
     params:
@@ -45,9 +53,21 @@ tasks:
       - func: buildDebianLinuxToolchain
       - func: uploadToolchain
 
-  - name: push-linux-binaries
+  - name: push-debian-linux-binaries
     depends_on:
     - name: build-debian-linux-toolchain
+    stepback: false
+    commands:
+      - func: pushToolchainRelease
+
+  - name: build-rhel-linux-toolchain
+    commands:
+      - func: buildRHELLinuxToolchain
+      - func: uploadToolchain
+
+  - name: push-rhel-linux-binaries
+    depends_on:
+    - name: build-rhel-linux-toolchain
     stepback: false
     commands:
       - func: pushToolchainRelease
@@ -65,7 +85,7 @@ buildvariants:
     arch: 64bit
   tasks:
      - name: build-debian-linux-toolchain
-     - name: push-linux-binaries
+     - name: push-debian-linux-binaries
 
 - name: debian92-32bit
   display_name: Debian 9.2 32-bit
@@ -75,7 +95,7 @@ buildvariants:
     arch: 32bit
   tasks:
      - name: build-debian-linux-toolchain
-     - name: push-linux-binaries
+     - name: push-debian-linux-binaries
 
 ## OpenSSL 1.0.2
 - name: ubuntu1604-64bit
@@ -86,7 +106,7 @@ buildvariants:
     arch: 64bit
   tasks:
      - name: build-debian-linux-toolchain
-     - name: push-linux-binaries
+     - name: push-debian-linux-binaries
 
 - name: ubuntu1604-32bit
   display_name: Ubuntu 16.04 32-bit
@@ -96,7 +116,17 @@ buildvariants:
     arch: 32bit
   tasks:
      - name: build-debian-linux-toolchain
-     - name: push-linux-binaries
+     - name: push-debian-linux-binaries
+
+- name: rhel70-64bit
+  display_name: RHEL 7.0 64-bit
+  run_on:
+    - rhel70
+  expansions:
+    arch: 64bit
+  tasks:
+     - name: build-rhel-linux-toolchain
+     - name: push-rhel-linux-binaries
 
 ## OpenSSL 1.0.1
 #- name: rhel62
