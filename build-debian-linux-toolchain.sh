@@ -69,4 +69,4 @@ do
     PREFIX="$INSTALL_DIR" ./build-debian-single.sh "$phprel" debug zts ${BITNESS}
 done
 
-tar -czvf php.tar.gz php
+tar -czf php.tar.gz php
