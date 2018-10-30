@@ -129,7 +129,7 @@ buildvariants:
      - name: push-rhel-linux-binaries
 
 - name: rhel71-power8
-  display_name: RHEL 7.0 Power 8
+  display_name: RHEL 7.1 Power 8
   run_on:
     - rhel71-power8-build
   expansions:
