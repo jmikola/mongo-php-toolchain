@@ -15,20 +15,20 @@ if (test "${ARCH}" = "32bit"); then
     PKG_ARCH=":i386"
 fi
 
-# Install required packages
-sudo apt-get update
-sudo apt-get install -y g++-multilib make autoconf gcc bison locate pkg-config
-
-# Install architecture dependent packages, but Ubuntu has different libssl versions
-sudo apt-get install -y libxml2-dev${PKG_ARCH} libicu-dev${PKG_ARCH} libz-dev${PKG_ARCH} libxslt1-dev${PKG_ARCH} libsasl2-dev${PKG_ARCH}
-
-VARIANT=`cat /etc/*-release | grep ^ID= | sed 's/ID=//'`
-if (test "${VARIANT}" = "ubuntu"); then
-	sudo apt-get install -y libssl1.0.0${PKG_ARCH}
-else
-	sudo apt-get install -y libssl1.1${PKG_ARCH}
-fi
-sudo apt-get install -y libssl-dev${PKG_ARCH}
+## Install required packages
+#sudo apt-get update
+#sudo apt-get install -y g++-multilib make autoconf gcc bison locate pkg-config
+#
+## Install architecture dependent packages, but Ubuntu has different libssl versions
+#sudo apt-get install -y libxml2-dev${PKG_ARCH} libicu-dev${PKG_ARCH} libz-dev${PKG_ARCH} libxslt1-dev${PKG_ARCH} libsasl2-dev${PKG_ARCH}
+#
+#VARIANT=`cat /etc/*-release | grep ^ID= | sed 's/ID=//'`
+#if (test "${VARIANT}" = "ubuntu"); then
+#	sudo apt-get install -y libssl1.0.0${PKG_ARCH}
+#else
+#	sudo apt-get install -y libssl1.1${PKG_ARCH}
+#fi
+#sudo apt-get install -y libssl-dev${PKG_ARCH}
 
 
 # Where we're installing everything.
