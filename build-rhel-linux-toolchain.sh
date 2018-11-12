@@ -6,7 +6,8 @@ set -o xtrace
 set -o nounset
 
 # Where we're installing everything.
-INSTALL_DIR=$(pwd)/php
+PROJECT_DIR=`pwd`
+INSTALL_DIR=/opt/php
 
 # PHP versions that support OpenSSL 1.0.2
 PHP_RELEASES_FOR_STABLE_OPENSSL="
@@ -38,7 +39,11 @@ else
     PHP_RELEASES=$PHP_RELEASES_FOR_STABLE_OPENSSL
 fi
 
-BITNESS=64bit
+if (test "${ARCH}" = "32bit"); then
+    BITNESS=32bit
+else
+    BITNESS=64bit
+fi
 
 for phprel in $PHP_RELEASES
 do
@@ -46,4 +51,5 @@ do
     PREFIX="$INSTALL_DIR" ./build-debian-single.sh "$phprel" debug zts ${BITNESS}
 done
 
-tar -czf php.tar.gz php
+cd /opt
+tar -czf "$PROJECT_DIR/php.tar.gz" php
