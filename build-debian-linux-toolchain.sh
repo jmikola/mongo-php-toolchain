@@ -32,7 +32,7 @@ sudo apt-get install -y libssl-dev${PKG_ARCH}
 
 
 # Where we're installing everything.
-INSTALL_DIR=$(pwd)/php
+INSTALL_DIR=/opt/php
 
 # PHP versions that support OpenSSL 1.0.2
 PHP_RELEASES_FOR_STABLE_OPENSSL="
@@ -69,4 +69,5 @@ do
     PREFIX="$INSTALL_DIR" ./build-debian-single.sh "$phprel" debug zts ${BITNESS}
 done
 
+cd /opt
 tar -czf php.tar.gz php
