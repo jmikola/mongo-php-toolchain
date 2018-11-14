@@ -53,7 +53,7 @@ rm -rf configure
 ./vcsclean
 ./buildconf --force
 
-OPTIONS="--with-openssl --enable-pcntl --enable-hash"
+OPTIONS="--with-openssl --enable-pcntl --enable-hash --with-zlib"
 
 ./configure --prefix=${PREFIX}/${VERSION}${POSTFIX} ${EXTRA_FLAGS} ${OPTIONS} || exit 5
 
