@@ -39,7 +39,7 @@ else
 fi
 
 if [ ! -f php-${VERSION}.tar.bz2 ]; then
-	wget http://us1.php.net/distributions/php-${VERSION}.tar.bz2 -O php-${VERSION}.tar.bz2
+	curl http://us1.php.net/distributions/php-${VERSION}.tar.bz2 -o php-${VERSION}.tar.bz2
 fi
 
 rm -rf php-${VERSION}
