@@ -41,7 +41,7 @@ if (test "${ARCH}" = "aarch64"); then
 fi
 if (test "${ARCH}" = "ppc64le"); then
     BITNESS=64bit
-    PHP_RELEASES=$PHP_RELEASES_FOR_MODERN_OPENSSL
+    PHP_RELEASES=$PHP_LATEST_RELEASES
 fi
 
 
