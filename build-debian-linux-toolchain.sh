@@ -5,6 +5,11 @@ set -o pipefail
 set -o xtrace
 set -o nounset
 
+FORCE_ARCH=
+# If the first argument is set, we force that architecture
+if [ $# == 1 ]; then
+    FORCE_ARCH=$1
+if
 
 # Where we're installing everything.
 PROJECT_DIR=`pwd`
@@ -49,6 +54,9 @@ fi
 if (test "${ARCH}" = "ppc64le"); then
     BITNESS=64bit
     PHP_RELEASES=$PHP_RELEASES_FOR_MODERN_OPENSSL
+fi
+if (test "${FORCE_ARCH}" != ""); then
+    BITNESS=${FORCE_ARCH}
 fi
 
 for phprel in $PHP_RELEASES

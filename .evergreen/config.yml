@@ -13,7 +13,7 @@ functions:
       script: |
         set -o errexit
         set -o xtrace
-        ./build-debian-linux-toolchain.sh
+        ./build-debian-linux-toolchain.sh ${arch}
   "buildRHELLinuxToolchain":
     command: shell.exec
     params:
@@ -89,6 +89,8 @@ buildvariants:
   display_name: Debian 9.2 32-bit
   run_on:
     - debian92-build
+  expansions:
+    arch: 32bit
   tasks:
      - name: build-debian-linux-toolchain
      - name: push-debian-linux-binaries
@@ -106,6 +108,8 @@ buildvariants:
   display_name: Ubuntu 16.04 32-bit
   run_on:
     - ubuntu1604-build
+  expansions:
+    arch: 32bit
   tasks:
      - name: build-debian-linux-toolchain
      - name: push-debian-linux-binaries
