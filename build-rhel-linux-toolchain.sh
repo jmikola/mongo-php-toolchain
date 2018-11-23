@@ -33,15 +33,14 @@ if (test "${ARCH}" = "x86_64"); then
 fi
 if (test "${ARCH}" = "s390x"); then
     BITNESS=64bit
-	PHP_RELEASES=$PHP_LATEST_RELEASES
+    PHP_RELEASES=$PHP_LATEST_STABLE_RELEASES
 fi
 if (test "${ARCH}" = "aarch64"); then
     BITNESS=64bit
-	PHP_RELEASES=$PHP_LATEST_RELEASES
+    PHP_RELEASES=$PHP_LATEST_STABLE_RELEASES
 fi
 if (test "${ARCH}" = "ppc64le"); then
     BITNESS=64bit
-    PHP_RELEASES=$PHP_LATEST_RELEASES
 fi
 
 
