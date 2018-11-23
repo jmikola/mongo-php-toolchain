@@ -9,7 +9,7 @@ FORCE_ARCH=
 # If the first argument is set, we force that architecture
 if [ $# == 1 ]; then
     FORCE_ARCH=$1
-if
+fi
 
 # Where we're installing everything.
 PROJECT_DIR=`pwd`
