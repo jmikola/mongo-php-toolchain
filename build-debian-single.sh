@@ -10,6 +10,9 @@ EXTRA_FLAGS=
 if (test "${PREFIX}" = ""); then
 	PREFIX="/opt";
 fi
+if (test "${EXTRA_OPTIONS}" != ""); then
+	EXTRA_FLAGS=${EXTRA_OPTIONS}
+fi
 
 NUMBERS=`echo $VERSION | sed -r 's/[^0-9.]+//'`
 MINI_VERSION=`echo $VERSION | sed 's/^\([0-9]\.[0-9]\).*/\1/'`

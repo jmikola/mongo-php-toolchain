@@ -29,6 +29,7 @@ PHP_LATEST_PHP7_RELEASES="
 "
 
 PHP_RELEASES=$PHP_ALL_RELEASES
+EXTRA_OPTIONS=
 
 ARCH=`uname -m`
 BITNESS=32bit
@@ -45,13 +46,14 @@ if (test "${ARCH}" = "aarch64"); then
 fi
 if (test "${ARCH}" = "ppc64le"); then
     BITNESS=64bit
+    EXTRA_OPTIONS=--without-pcre-jit
 fi
 
 
 for phprel in $PHP_RELEASES
 do
-    PREFIX="$INSTALL_DIR" ./build-debian-single.sh "$phprel" debug nts ${BITNESS}
-    PREFIX="$INSTALL_DIR" ./build-debian-single.sh "$phprel" debug zts ${BITNESS}
+    EXTRA_OPTIONS=${EXTRA_OPTIONS} PREFIX="$INSTALL_DIR" ./build-debian-single.sh "$phprel" debug nts ${BITNESS}
+    EXTRA_OPTIONS=${EXTRA_OPTIONS} PREFIX="$INSTALL_DIR" ./build-debian-single.sh "$phprel" debug zts ${BITNESS}
 done
 
 cd /opt
