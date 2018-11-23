@@ -13,7 +13,7 @@ functions:
       script: |
         set -o errexit
         set -o xtrace
-        ./build-debian-linux-toolchain.sh ${arch}
+        ./build-debian-linux-toolchain.sh
   "buildRHELLinuxToolchain":
     command: shell.exec
     params:
@@ -21,7 +21,7 @@ functions:
       script: |
         set -o errexit
         set -o xtrace
-        ./build-rhel-linux-toolchain.sh ${arch}
+        ./build-rhel-linux-toolchain.sh
   "uploadToolchain":
     command: s3.put
     params:
@@ -81,8 +81,6 @@ buildvariants:
   display_name: Debian 9.2 64-bit
   run_on:
     - debian92-build
-  expansions:
-    arch: 64bit
   tasks:
      - name: build-debian-linux-toolchain
      - name: push-debian-linux-binaries
@@ -91,8 +89,6 @@ buildvariants:
   display_name: Debian 9.2 32-bit
   run_on:
     - debian92-build
-  expansions:
-    arch: 32bit
   tasks:
      - name: build-debian-linux-toolchain
      - name: push-debian-linux-binaries
@@ -102,8 +98,6 @@ buildvariants:
   display_name: Ubuntu 16.04 64-bit
   run_on:
     - ubuntu1604-build
-  expansions:
-    arch: 64bit
   tasks:
      - name: build-debian-linux-toolchain
      - name: push-debian-linux-binaries
@@ -112,8 +106,6 @@ buildvariants:
   display_name: Ubuntu 16.04 32-bit
   run_on:
     - ubuntu1604-build
-  expansions:
-    arch: 32bit
   tasks:
      - name: build-debian-linux-toolchain
      - name: push-debian-linux-binaries
@@ -122,8 +114,6 @@ buildvariants:
   display_name: RHEL 7.0 64-bit
   run_on:
     - rhel70
-  expansions:
-    arch: 64bit
   tasks:
      - name: build-rhel-linux-toolchain
      - name: push-rhel-linux-binaries
@@ -132,8 +122,6 @@ buildvariants:
   display_name: RHEL 7.1 Power 8
   run_on:
     - rhel71-power8-build
-  expansions:
-    arch: 64bit
   tasks:
      - name: build-rhel-linux-toolchain
      - name: push-rhel-linux-binaries
@@ -142,8 +130,6 @@ buildvariants:
   display_name: RHEL 7.2 zSeries
   run_on:
     - rhel72-zseries-build
-  expansions:
-    arch: 64bit
   tasks:
      - name: build-rhel-linux-toolchain
      - name: push-rhel-linux-binaries
@@ -152,8 +138,6 @@ buildvariants:
   display_name: Ubuntu 16.04 ARM64
   run_on:
     - ubuntu1604-arm64-large
-  expansions:
-    arch: 64bit
   tasks:
      - name: build-rhel-linux-toolchain
      - name: push-rhel-linux-binaries

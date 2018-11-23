@@ -5,31 +5,6 @@ set -o pipefail
 set -o xtrace
 set -o nounset
 
-# First argument is the architecture (32bit, when empty: x86_64)
-ARCH=$1
-PKG_ARCH=""
-
-# Add 32bit architecture if needed
-if (test "${ARCH}" = "32bit"); then
-    sudo dpkg --add-architecture i386
-    PKG_ARCH=":i386"
-fi
-
-## Install required packages
-#sudo apt-get update
-#sudo apt-get install -y g++-multilib make autoconf gcc bison locate pkg-config
-#
-## Install architecture dependent packages, but Ubuntu has different libssl versions
-#sudo apt-get install -y libxml2-dev${PKG_ARCH} libicu-dev${PKG_ARCH} libz-dev${PKG_ARCH} libxslt1-dev${PKG_ARCH} libsasl2-dev${PKG_ARCH}
-#
-#VARIANT=`cat /etc/*-release | grep ^ID= | sed 's/ID=//'`
-#if (test "${VARIANT}" = "ubuntu"); then
-#	sudo apt-get install -y libssl1.0.0${PKG_ARCH}
-#else
-#	sudo apt-get install -y libssl1.1${PKG_ARCH}
-#fi
-#sudo apt-get install -y libssl-dev${PKG_ARCH}
-
 
 # Where we're installing everything.
 PROJECT_DIR=`pwd`
@@ -58,10 +33,17 @@ elif [[ $OPENSSL_MINOR_VERSION = "0" && $OPENSSL_PATCH_VERSION = "2" ]]; then
     PHP_RELEASES=$PHP_RELEASES_FOR_STABLE_OPENSSL
 fi
 
-if (test "${ARCH}" = "32bit"); then
-    BITNESS=32bit
-else
+BITNESS=32bit
+if (test "${ARCH}" = "x86_64"); then
     BITNESS=64bit
+fi
+if (test "${ARCH}" = "s390x"); then
+    BITNESS=64bit
+    PHP_RELEASES=$PHP_RELEASES_FOR_MODERN_OPENSSL
+fi
+if (test "${ARCH}" = "aarch64"); then
+    BITNESS=64bit
+    PHP_RELEASES=$PHP_RELEASES_FOR_MODERN_OPENSSL
 fi
 
 for phprel in $PHP_RELEASES

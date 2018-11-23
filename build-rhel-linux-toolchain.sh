@@ -9,8 +9,8 @@ set -o nounset
 PROJECT_DIR=`pwd`
 INSTALL_DIR=/opt/php
 
-# PHP versions that support OpenSSL 1.0.2
-PHP_RELEASES_FOR_STABLE_OPENSSL="
+# PHP versions
+PHP_ALL_RELEASES="
 5.5.38
 5.6.38
 7.0.32
@@ -18,32 +18,29 @@ PHP_RELEASES_FOR_STABLE_OPENSSL="
 7.2.10
 "
 
-# PHP versions that support OpenSSL >= 1.1.0
-PHP_RELEASES_FOR_MODERN_OPENSSL="
-5.5.38
+# PHP recent versions
+PHP_LATEST_STABLE_RELEASES="
 5.6.38
-7.0.32
-7.1.22
 7.2.10
 "
 
-OPENSSL_MAJOR_VERSION=$(openssl version | cut -d' ' -f2 | cut -b1)
-OPENSSL_MINOR_VERSION=$(openssl version | cut -d. -f2)
-OPENSSL_PATCH_VERSION=$(openssl version | cut -d. -f3 | cut -b1)
-OPENSSL_PATCH_LETTER=$(openssl version | cut -d. -f3 | cut -b2)
-if [ $OPENSSL_MINOR_VERSION = "1" ]; then
-    PHP_RELEASES=$PHP_RELEASES_FOR_MODERN_OPENSSL
-elif [[ $OPENSSL_MINOR_VERSION = "0" && $OPENSSL_PATCH_VERSION = "2" ]]; then
-    PHP_RELEASES=$PHP_RELEASES_FOR_STABLE_OPENSSL
-else
-    PHP_RELEASES=$PHP_RELEASES_FOR_STABLE_OPENSSL
-fi
+ARCH=`uname -m`
 
-if (test "${ARCH}" = "32bit"); then
-    BITNESS=32bit
-else
+PHP_RELEASES=$PHP_ALL_RELEASES
+
+BITNESS=32bit
+if (test "${ARCH}" = "x86_64"); then
     BITNESS=64bit
 fi
+if (test "${ARCH}" = "s390x"); then
+    BITNESS=64bit
+	PHP_RELEASES=$PHP_LATEST_RELEASES
+fi
+if (test "${ARCH}" = "aarch64"); then
+    BITNESS=64bit
+	PHP_RELEASES=$PHP_LATEST_RELEASES
+fi
+
 
 for phprel in $PHP_RELEASES
 do
