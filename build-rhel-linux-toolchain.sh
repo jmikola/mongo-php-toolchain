@@ -24,10 +24,6 @@ PHP_LATEST_STABLE_RELEASES="
 7.2.10
 "
 
-PHP_LATEST_PHP7_RELEASES="
-7.2.10
-"
-
 PHP_RELEASES=$PHP_ALL_RELEASES
 EXTRA_OPTIONS=
 
@@ -38,7 +34,7 @@ if (test "${ARCH}" = "x86_64"); then
 fi
 if (test "${ARCH}" = "s390x"); then
     BITNESS=64bit
-    PHP_RELEASES=$PHP_LATEST_PHP7_RELEASES
+    PHP_RELEASES=$PHP_LATEST_STABLE_RELEASES
     EXTRA_OPTIONS=--without-pcre-jit
 fi
 if (test "${ARCH}" = "aarch64"); then
