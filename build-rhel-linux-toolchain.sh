@@ -39,6 +39,7 @@ fi
 if (test "${ARCH}" = "s390x"); then
     BITNESS=64bit
     PHP_RELEASES=$PHP_LATEST_PHP7_RELEASES
+    EXTRA_OPTIONS=--without-pcre-jit
 fi
 if (test "${ARCH}" = "aarch64"); then
     BITNESS=64bit
@@ -46,7 +47,6 @@ if (test "${ARCH}" = "aarch64"); then
 fi
 if (test "${ARCH}" = "ppc64le"); then
     BITNESS=64bit
-    EXTRA_OPTIONS=--without-pcre-jit
 fi
 
 
