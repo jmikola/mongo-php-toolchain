@@ -18,6 +18,13 @@ PHP_ALL_RELEASES="
 7.2.10
 "
 
+# PCRE's JIT disabling only works on PHP 7
+PHP_RELEASES_WITH_JIT_DISABLE="
+7.0.32
+7.1.22
+7.2.10
+"
+
 # PHP recent versions
 PHP_LATEST_STABLE_RELEASES="
 5.6.38
@@ -34,7 +41,7 @@ if (test "${ARCH}" = "x86_64"); then
 fi
 if (test "${ARCH}" = "s390x"); then
     BITNESS=64bit
-    PHP_RELEASES=$PHP_LATEST_STABLE_RELEASES
+    PHP_RELEASES=$PHP_RELEASES_WITH_JIT_DISABLE
     EXTRA_OPTIONS=--without-pcre-jit
 fi
 if (test "${ARCH}" = "aarch64"); then
