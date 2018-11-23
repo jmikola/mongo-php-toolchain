@@ -33,6 +33,7 @@ elif [[ $OPENSSL_MINOR_VERSION = "0" && $OPENSSL_PATCH_VERSION = "2" ]]; then
     PHP_RELEASES=$PHP_RELEASES_FOR_STABLE_OPENSSL
 fi
 
+ARCH=`uname -m`
 BITNESS=32bit
 if (test "${ARCH}" = "x86_64"); then
     BITNESS=64bit
@@ -42,6 +43,10 @@ if (test "${ARCH}" = "s390x"); then
     PHP_RELEASES=$PHP_RELEASES_FOR_MODERN_OPENSSL
 fi
 if (test "${ARCH}" = "aarch64"); then
+    BITNESS=64bit
+    PHP_RELEASES=$PHP_RELEASES_FOR_MODERN_OPENSSL
+fi
+if (test "${ARCH}" = "ppc64le"); then
     BITNESS=64bit
     PHP_RELEASES=$PHP_RELEASES_FOR_MODERN_OPENSSL
 fi

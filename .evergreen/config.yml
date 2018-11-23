@@ -139,5 +139,5 @@ buildvariants:
   run_on:
     - ubuntu1604-arm64-large
   tasks:
-     - name: build-rhel-linux-toolchain
-     - name: push-rhel-linux-binaries
+     - name: build-debian-linux-toolchain
+     - name: push-debian-linux-binaries

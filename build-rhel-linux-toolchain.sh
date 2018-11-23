@@ -24,10 +24,9 @@ PHP_LATEST_STABLE_RELEASES="
 7.2.10
 "
 
-ARCH=`uname -m`
-
 PHP_RELEASES=$PHP_ALL_RELEASES
 
+ARCH=`uname -m`
 BITNESS=32bit
 if (test "${ARCH}" = "x86_64"); then
     BITNESS=64bit
@@ -39,6 +38,10 @@ fi
 if (test "${ARCH}" = "aarch64"); then
     BITNESS=64bit
 	PHP_RELEASES=$PHP_LATEST_RELEASES
+fi
+if (test "${ARCH}" = "ppc64le"); then
+    BITNESS=64bit
+    PHP_RELEASES=$PHP_RELEASES_FOR_MODERN_OPENSSL
 fi
 
 
