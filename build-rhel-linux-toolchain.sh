@@ -55,8 +55,8 @@ fi
 
 for phprel in $PHP_RELEASES
 do
-    EXTRA_OPTIONS=${EXTRA_OPTIONS} PREFIX="$INSTALL_DIR" ./build-debian-single.sh "$phprel" debug nts ${BITNESS}
-    EXTRA_OPTIONS=${EXTRA_OPTIONS} PREFIX="$INSTALL_DIR" ./build-debian-single.sh "$phprel" debug zts ${BITNESS}
+    EXTRA_OPTIONS=${EXTRA_OPTIONS} PREFIX="$INSTALL_DIR" ./build-single.sh "$phprel" debug nts ${BITNESS}
+    EXTRA_OPTIONS=${EXTRA_OPTIONS} PREFIX="$INSTALL_DIR" ./build-single.sh "$phprel" debug zts ${BITNESS}
 done
 
 cd /opt

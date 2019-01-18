@@ -61,8 +61,8 @@ fi
 
 for phprel in $PHP_RELEASES
 do
-    PREFIX="$INSTALL_DIR" ./build-debian-single.sh "$phprel" debug nts ${BITNESS}
-    PREFIX="$INSTALL_DIR" ./build-debian-single.sh "$phprel" debug zts ${BITNESS}
+    PREFIX="$INSTALL_DIR" ./build-single.sh "$phprel" debug nts ${BITNESS}
+    PREFIX="$INSTALL_DIR" ./build-single.sh "$phprel" debug zts ${BITNESS}
 done
 
 cd /opt
