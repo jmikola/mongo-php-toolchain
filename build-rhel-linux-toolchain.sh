@@ -13,45 +13,36 @@ INSTALL_DIR=/opt/php
 PHP_ALL_RELEASES="
 5.5.38
 5.6.38
-7.0.32
-7.1.22
-7.2.10
+7.1.31
+7.2.21
+7.3.8
 "
 
 # PCRE's JIT disabling only works on PHP 7
 PHP_RELEASES_WITH_JIT_DISABLE="
-7.0.32
-7.1.22
-7.2.10
+7.1.31
+7.2.21
+7.3.8
 "
 
 # PHP recent versions
 PHP_LATEST_STABLE_RELEASES="
 5.6.38
-7.2.10
+7.2.21
 "
 
 PHP_RELEASES=$PHP_ALL_RELEASES
 EXTRA_OPTIONS=
 
 ARCH=`uname -m`
-BITNESS=32bit
-if (test "${ARCH}" = "x86_64"); then
-    BITNESS=64bit
-fi
+BITNESS=64bit
 if (test "${ARCH}" = "s390x"); then
-    BITNESS=64bit
     PHP_RELEASES=$PHP_RELEASES_WITH_JIT_DISABLE
     EXTRA_OPTIONS=--without-pcre-jit
 fi
 if (test "${ARCH}" = "aarch64"); then
-    BITNESS=64bit
     PHP_RELEASES=$PHP_LATEST_STABLE_RELEASES
 fi
-if (test "${ARCH}" = "ppc64le"); then
-    BITNESS=64bit
-fi
-
 
 for phprel in $PHP_RELEASES
 do
