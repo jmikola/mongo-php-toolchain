@@ -85,31 +85,11 @@ buildvariants:
      - name: build-debian-linux-toolchain
      - name: push-debian-linux-binaries
 
-- name: debian92-32bit
-  display_name: Debian 9.2 32-bit
-  run_on:
-    - debian92-build
-  expansions:
-    arch: 32bit
-  tasks:
-     - name: build-debian-linux-toolchain
-     - name: push-debian-linux-binaries
-
 ## OpenSSL 1.0.2
 - name: ubuntu1604-64bit
   display_name: Ubuntu 16.04 64-bit
   run_on:
     - ubuntu1604-build
-  tasks:
-     - name: build-debian-linux-toolchain
-     - name: push-debian-linux-binaries
-
-- name: ubuntu1604-32bit
-  display_name: Ubuntu 16.04 32-bit
-  run_on:
-    - ubuntu1604-build
-  expansions:
-    arch: 32bit
   tasks:
      - name: build-debian-linux-toolchain
      - name: push-debian-linux-binaries
