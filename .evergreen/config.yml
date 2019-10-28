@@ -129,7 +129,7 @@ buildvariants:
 - name: ubuntu1804-arm64
   display_name: Ubuntu 18.04 ARM64
   run_on:
-    - ubuntu1804-arm64-small
+    - ubuntu1804-arm64-test
   tasks:
      - name: build-debian-linux-toolchain
      - name: push-debian-linux-binaries
