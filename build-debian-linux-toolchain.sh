@@ -26,6 +26,7 @@ PHP_RELEASES_FOR_MODERN_OPENSSL="
 7.1.31
 7.2.21
 7.3.8
+7.4.7
 "
 
 OPENSSL_MAJOR_VERSION=$(openssl version | cut -d' ' -f2 | cut -b1)

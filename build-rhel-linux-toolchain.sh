@@ -16,6 +16,7 @@ PHP_ALL_RELEASES="
 7.1.31
 7.2.21
 7.3.8
+7.4.7
 "
 
 # PCRE's JIT disabling only works on PHP 7
@@ -23,12 +24,14 @@ PHP_RELEASES_WITH_JIT_DISABLE="
 7.1.31
 7.2.21
 7.3.8
+7.4.7
 "
 
 # PHP recent versions
 PHP_LATEST_STABLE_RELEASES="
 5.6.38
 7.2.21
+7.4.7
 "
 
 PHP_RELEASES=$PHP_ALL_RELEASES
