@@ -13,6 +13,7 @@ INSTALL_DIR=/opt/php
 PHP_ALL_RELEASES="
 5.5.38
 5.6.38
+7.0.32
 7.1.31
 7.2.21
 7.3.8
@@ -21,6 +22,7 @@ PHP_ALL_RELEASES="
 
 # PCRE's JIT disabling only works on PHP 7
 PHP_RELEASES_WITH_JIT_DISABLE="
+7.0.32
 7.1.31
 7.2.21
 7.3.8
@@ -30,7 +32,10 @@ PHP_RELEASES_WITH_JIT_DISABLE="
 # PHP recent versions
 PHP_LATEST_STABLE_RELEASES="
 5.6.38
+7.0.32
+7.1.31
 7.2.21
+7.3.8
 7.4.7
 "
 
