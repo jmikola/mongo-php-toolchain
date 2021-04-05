@@ -126,7 +126,7 @@ buildvariants:
      - name: build-debian-linux-toolchain
      - name: push-debian-linux-binaries
 
-- name: ubuntu1804-amd64
+- name: ubuntu1804-64bit
   display_name: Ubuntu 18.04 AMD64
   run_on:
     - ubuntu1804-small
