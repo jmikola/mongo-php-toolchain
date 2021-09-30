@@ -68,5 +68,9 @@ do
     PREFIX="$INSTALL_DIR" ./build-single.sh "$phprel" debug zts ${BITNESS}
 done
 
+# Install PHP 8.1 pre-release versions from custom URI
+PREFIX="$INSTALL_DIR" ./build-single.sh "8.1.0rc1" debug nts ${BITNESS} "https://downloads.php.net/~patrickallaert/php-8.1.0RC1.tar.bz2"
+PREFIX="$INSTALL_DIR" ./build-single.sh "8.1.0rc1" debug zts ${BITNESS} "https://downloads.php.net/~patrickallaert/php-8.1.0RC1.tar.bz2"
+
 cd /opt
 tar -czf "$PROJECT_DIR/php.tar.gz" php

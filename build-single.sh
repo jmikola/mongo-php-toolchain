@@ -4,6 +4,7 @@ VERSION=$1
 DEBUG=$2
 ZTS=$3
 THIRTYTWO=$4
+DOWNLOAD_URI=$5
 POSTFIX=
 EXTRA_FLAGS=
 
@@ -42,7 +43,10 @@ else
 fi
 
 if [ ! -f php-${VERSION}.tar.bz2 ]; then
-	curl -k https://www.php.net/distributions/php-${VERSION}.tar.bz2 -o php-${VERSION}.tar.bz2
+	if (test "${DOWNLOAD_URI}" = ""); then
+		DOWNLOAD_URI="https://www.php.net/distributions/php-${VERSION}.tar.bz2"
+	fi
+	curl -k "${DOWNLOAD_URI}" -o php-${VERSION}.tar.bz2
 fi
 
 rm -rf php-${VERSION}
