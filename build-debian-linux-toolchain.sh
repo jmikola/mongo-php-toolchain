@@ -18,17 +18,17 @@ INSTALL_DIR=/opt/php
 # PHP versions that support OpenSSL 1.0.2
 PHP_RELEASES_FOR_STABLE_OPENSSL="
 5.5.38
-5.6.38
+5.6.40
 "
 
 # PHP versions that support OpenSSL >= 1.1.0
 PHP_RELEASES_FOR_MODERN_OPENSSL="
-7.0.32
-7.1.31
-7.2.21
-7.3.26
-7.4.14
-8.0.1
+7.0.33
+7.1.33
+7.2.34
+7.3.31
+7.4.24
+8.0.11
 "
 
 OPENSSL_MAJOR_VERSION=$(openssl version | cut -d' ' -f2 | cut -b1)
@@ -69,8 +69,8 @@ do
 done
 
 # Install PHP 8.1 pre-release versions from custom URI
-PREFIX="$INSTALL_DIR" ./build-single.sh "8.1.0RC5" debug nts ${BITNESS} "https://downloads.php.net/~patrickallaert/php-8.1.0RC5.tar.bz2"
-PREFIX="$INSTALL_DIR" ./build-single.sh "8.1.0RC5" debug zts ${BITNESS} "https://downloads.php.net/~patrickallaert/php-8.1.0RC5.tar.bz2"
+PREFIX="$INSTALL_DIR" ./build-single.sh "8.1.0RC6" debug nts ${BITNESS} "https://downloads.php.net/~patrickallaert/php-8.1.0RC6.tar.bz2"
+PREFIX="$INSTALL_DIR" ./build-single.sh "8.1.0RC6" debug zts ${BITNESS} "https://downloads.php.net/~patrickallaert/php-8.1.0RC6.tar.bz2"
 
 cd /opt
 tar -czf "$PROJECT_DIR/php.tar.gz" php
