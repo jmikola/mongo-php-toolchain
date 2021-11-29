@@ -26,9 +26,10 @@ PHP_RELEASES_FOR_MODERN_OPENSSL="
 7.0.33
 7.1.33
 7.2.34
-7.3.31
-7.4.24
-8.0.11
+7.3.33
+7.4.26
+8.0.13
+8.1.0
 "
 
 OPENSSL_MAJOR_VERSION=$(openssl version | cut -d' ' -f2 | cut -b1)
@@ -67,10 +68,6 @@ do
     PREFIX="$INSTALL_DIR" ./build-single.sh "$phprel" debug nts ${BITNESS}
     PREFIX="$INSTALL_DIR" ./build-single.sh "$phprel" debug zts ${BITNESS}
 done
-
-# Install PHP 8.1 pre-release versions from custom URI
-PREFIX="$INSTALL_DIR" ./build-single.sh "8.1.0RC6" debug nts ${BITNESS} "https://downloads.php.net/~patrickallaert/php-8.1.0RC6.tar.bz2"
-PREFIX="$INSTALL_DIR" ./build-single.sh "8.1.0RC6" debug zts ${BITNESS} "https://downloads.php.net/~patrickallaert/php-8.1.0RC6.tar.bz2"
 
 cd /opt
 tar -czf "$PROJECT_DIR/php.tar.gz" php
