@@ -9,6 +9,9 @@ set -o nounset
 PROJECT_DIR=`pwd`
 INSTALL_DIR=/opt/php
 
+# Note: PHP 8.1.0 requires OpenSSL 1.0.2+. Several RHEL hosts only have 1.0.1e
+# available to PHP 8.1 will be intentionally excluded.
+
 # PHP versions
 PHP_ALL_RELEASES="
 5.5.38
@@ -19,7 +22,6 @@ PHP_ALL_RELEASES="
 7.3.33
 7.4.26
 8.0.13
-8.1.0
 "
 
 # PCRE's JIT disabling only works on PHP 7.0.12+
@@ -30,7 +32,6 @@ PHP_RELEASES_WITH_JIT_DISABLE="
 7.3.33
 7.4.26
 8.0.13
-8.1.0
 "
 
 # PHP recent versions
@@ -42,7 +43,6 @@ PHP_LATEST_STABLE_RELEASES="
 7.3.33
 7.4.26
 8.0.13
-8.1.0
 "
 
 PHP_RELEASES=$PHP_ALL_RELEASES
